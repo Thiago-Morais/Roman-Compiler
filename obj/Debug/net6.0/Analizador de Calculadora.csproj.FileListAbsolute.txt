@@ -1,0 +1,15 @@
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\bin\Debug\net6.0\Analizador de Calculadora.exe
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\bin\Debug\net6.0\Analizador de Calculadora.deps.json
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\bin\Debug\net6.0\Analizador de Calculadora.runtimeconfig.json
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\bin\Debug\net6.0\Analizador de Calculadora.dll
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\bin\Debug\net6.0\ref\Analizador de Calculadora.dll
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\bin\Debug\net6.0\Analizador de Calculadora.pdb
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\obj\Debug\net6.0\Analizador de Calculadora.csproj.AssemblyReference.cache
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\obj\Debug\net6.0\Analizador de Calculadora.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\obj\Debug\net6.0\Analizador de Calculadora.AssemblyInfoInputs.cache
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\obj\Debug\net6.0\Analizador de Calculadora.AssemblyInfo.cs
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\obj\Debug\net6.0\Analizador de Calculadora.csproj.CoreCompileInputs.cache
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\obj\Debug\net6.0\Analizador de Calculadora.dll
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\obj\Debug\net6.0\ref\Analizador de Calculadora.dll
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\obj\Debug\net6.0\Analizador de Calculadora.pdb
+D:\Users\Windows\Documents\UNEB\Compiladores\Analizador de Calculadora\obj\Debug\net6.0\Analizador de Calculadora.genruntimeconfig.cache

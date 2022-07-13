@@ -1,0 +1,141 @@
+S::=E
+E::=M
+E::=D
+E::=A
+E::=N
+E::=(E)
+M::=T*E
+D::=T/E
+A::=T+E
+N::=T-E
+T::=num
+T::=id
+M::=T
+D::=T
+A::=T
+N::=T
+
+I II III IV V VI VII VIII IX X
+XI XII XIII XIV XV XVI XVII XVIII XIX XX
+XXX
+XL
+L
+LX
+LXX
+LXXX
+XC
+C
+LXXXVIII
+IIXC
+
+X ::= T E
+E ::= + T E
+E ::= - T E
+E ::= ''
+E ::= * T E
+E ::= / T E
+# T ::= I T' | V T' | X T' | L T' | C T'
+# T' ::= I T'' | '' | V T'' | X T'' | L | C
+# T'' ::= I | ''
+
+M ::= C | D
+D ::= X C U | X L U | L D' U | D' U
+D' ::= X D'' U | ''
+D'' ::= X D''' U | ''
+D''' ::= X U | ''
+U ::= I X | I V | V U' | U'
+U' ::= I U'' | ''
+U'' ::= I U''' | ''
+U''' ::= I | ''
+
+Q ::= C | 
+A ::= L | 
+Z ::= X W | 
+W ::= V S | 
+S ::= I S | ''
+X ::= '' | 
+E ::= I
+D ::= I
+
+U ::= I
+
+U ::= I
+
+M ::= C 
+M ::= D
+D ::= X C U 
+D ::= X L U 
+D ::= L D' U 
+D ::= D' U
+D' ::= X D'' U 
+D' ::= ''
+D'' ::= X D''' U 
+D'' ::= ''
+D''' ::= X U 
+D''' ::= ''
+U ::= I X 
+U ::= I V 
+U ::= V U' 
+U ::= U'
+U' ::= I U'' 
+U' ::= ''
+U'' ::= I U''' 
+U'' ::= ''
+U''' ::= I 
+U''' ::= ''
+
+
+U ::= I 
+U ::= X 
+U ::= V U'
+U ::= V U' 
+U ::= U'
+U' ::= I U'' 
+U' ::= ''
+U'' ::= I U''' 
+U'' ::= ''
+U''' ::= I 
+U''' ::= ''
+
+M ::= C 
+M ::= D
+D ::= X C U 
+D ::= X L U 
+D ::= L F U 
+D ::= F U
+F ::= X G U 
+F ::= ''
+G ::= X H U 
+G ::= ''
+H ::= X U 
+H ::= ''
+U ::= I X 
+U ::= I V 
+U ::= V J 
+U ::= J
+J ::= I O 
+J ::= ''
+O ::= I P 
+O ::= ''
+P ::= I 
+P ::= ''
+
+
+T' ::= I T'' | '' | V T'' | X T'' | L | C
+T'' ::= I | ''
+T ::= num
+T ::= ( X )
+
+num + ( ( ( id ) / id ) )
+
+
+0 ::= 1
+1 ::= V 2
+1 ::= I 3
+2 ::= I 3
+2 ::= ''
+3 ::= I 4
+3 ::= V
+3 ::= ''
+4 ::= I
+4 ::= ''
