@@ -6,8 +6,15 @@ using MyCompiler.Analyzers;
 Console.WriteLine("Enter roman expression:");
 string expression = "C-LXXXVIII*(VIII+IX/(III+I))=";
 
-DataTable table = new DataTable();
+var tokenizers = new List<Tokenizer>()
+{
+    new Tokenizer(TokenType.Operator, @"([+\-*/])"),
+    // FIXME verificar se essa constante está formatada corretamente
+    new Tokenizer(TokenType.Constant, @"([IVXLC]+)"),
+    new Tokenizer(TokenType.Puntuator, @"([\(\)=])"),
+};
 
+DataTable table = new DataTable();
 DataColumn[] columns = new DataColumn[]
 {
     new DataColumn("[terminals]", typeof(string)),
@@ -18,6 +25,7 @@ DataColumn[] columns = new DataColumn[]
     new DataColumn("T", typeof(Symbols)),
 };
 table.Columns.AddRange(columns);
+table.PrimaryKey = new[] { table.Columns["[terminals]"] };
 
 var S = new Symbol(SymbolType.NonTerminal, "S");
 var X = new Symbol(SymbolType.NonTerminal, "X");
@@ -48,17 +56,9 @@ object[] rows = new object[]
 };
 foreach (object[] _row in rows)
     table.Rows.Add(_row);
-table.PrimaryKey = new[] { table.Columns["[terminals]"] };
 
 ParserTable parserTable = new ParserTable(table);
 
-var tokenizers = new List<Tokenizer>()
-{
-    new Tokenizer(TokenType.Operator, @"([+\-*/])"),
-    // FIXME verificar se essa constante está formatada corretamente
-    new Tokenizer(TokenType.Constant, @"([IVXLC]+)"),
-    new Tokenizer(TokenType.Puntuator, @"([\(\)=])"),
-};
 var compiler = new Compiler(tokenizers, S, end, parserTable);
 compiler.Compile(expression);
 Console.WriteLine($"IsScriptValid = {compiler.Success}");

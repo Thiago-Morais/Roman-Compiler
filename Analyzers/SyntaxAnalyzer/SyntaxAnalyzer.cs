@@ -6,14 +6,14 @@ namespace MyCompiler.Analyzers
     {
         Stack<Token> remainingTokens = new Stack<Token>();
         Stack<Symbol> symbolStack = new Stack<Symbol>();
-        Symbols currentSymbols;
+        Symbol currentSymbol;
+        Symbols currentProduction;
         public Symbol EndSymbol { get; }
         public Symbol FirstSymbol { get; private set; }
         public ParserTable Parser { get; }
         public bool IsValid { get; set; }
         public bool IsDone { get; protected set; }
         Token CurrentToken => remainingTokens.Peek();
-
 
         public SyntaxAnalyzer(Symbol firstSymbol, Symbol endSymbol, ParserTable parser)
         {
@@ -34,27 +34,33 @@ namespace MyCompiler.Analyzers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine($"{e}\nRemaining tokens:{string.Join(" ; ", remainingTokens)}");
                 IsValid = false;
+            }
+            finally
+            {
+                IsDone = true;
             }
         }
         void Parse()
         {
             while (remainingTokens.Count > 0 || symbolStack.Count > 0)
             {
-                Symbol symbol = symbolStack.Pop();
-                if (symbol.IsNull || symbol.IsEmpty) continue;
-                if (!symbol.IsTerminal)
+                if (symbolStack.Peek().IsNull)
+                    throw new Exception($"Invalid symbol {currentSymbol}");
+                currentSymbol = symbolStack.Pop();
+                if (currentSymbol.IsEmpty)
+                    continue;
+                if (!currentSymbol.IsTerminal)
                 {
-                    currentSymbols = GetProductionFor(symbol);
+                    currentProduction = GetProductionFor(currentSymbol);
 
-                    for (int i = currentSymbols.Values.Count - 1; i >= 0; i--)
-                        symbolStack.Push(currentSymbols.Values[i]);
+                    for (int i = currentProduction.Values.Count - 1; i >= 0; i--)
+                        symbolStack.Push(currentProduction.Values[i]);
                 }
                 else
                     remainingTokens.Pop();
             }
-            IsDone = true;
         }
         Symbols GetProductionFor(Symbol symbol)
         {
@@ -70,48 +76,6 @@ namespace MyCompiler.Analyzers
             symbolStack.Push(FirstSymbol);
             IsDone = false;
         }
-    }
-    public struct Symbols
-    {
-        public List<Symbol> Values { get; } = new List<Symbol>();
-        public SymbolType DefaultType { get; }
-        public Symbols(params Symbol[] symbols) : this(defaultType: default) => Values.AddRange(symbols);
-        public Symbols(SymbolType defaultType) => DefaultType = defaultType;
-        public Symbols Append(params string[] names)
-        {
-            SymbolType type = DefaultType;
-            Symbol[] symbols = Array.ConvertAll(names, n => new Symbol(type, n));
-            return Append(symbols);
-        }
-        public Symbols Append(params Symbol[] symbols)
-        {
-            Values.AddRange(symbols);
-            return this;
-        }
-        public Symbols Append(string name) => And(new Symbol(DefaultType, name));
-        public Symbols And(Symbol symbol)
-        {
-            Values.Add(symbol);
-            return this;
-        }
-        public static Symbols Null => new Symbols(Symbol.Null);
-        public static Symbols Empty() => new Symbols(Symbol.Empty);
-    }
-    public struct Symbol
-    {
-        public SymbolType Type { get; private set; }
-        public string Value { get; private set; }
-        public bool IsNull => Type == SymbolType.Null;
-        public bool IsEmpty => Type == SymbolType.Empty;
-        public bool IsTerminal => Type == SymbolType.Terminal;
-        public bool IsNonTerminal => Type == SymbolType.NonTerminal;
-        public Symbol(SymbolType type, string value) : this()
-        {
-            Type = type;
-            Value = value;
-        }
-        public static Symbol Null => new Symbol(SymbolType.Null, null);
-        public static Symbol Empty => new Symbol(SymbolType.Empty, "");
     }
 
     public enum SymbolType { Null, Empty, Terminal, NonTerminal }
