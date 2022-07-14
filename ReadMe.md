@@ -35,10 +35,10 @@ num - num * ( num + num / ( num + num ) ) =
 
 ## Lexemas
 
-- Identifier
 - Operator
 - Constant
-- Keyword
-- Literal
 - Puntuator
-- Spacial Character
+
+## Link para o video:
+
+https://drive.google.com/drive/folders/1DxUVta9A2SFZwRQ14-vVqQGf5yE5_0sI?usp=sharing
