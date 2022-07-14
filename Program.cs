@@ -4,7 +4,7 @@ using MyCompiler.Analyzers;
 
 
 Console.WriteLine("Enter roman expression:");
-string expression = "C-LXXXVIII*(VIII+IX/(III+I))=";
+string expression = "C--LXXXVIII*(VIII+IX/(III+I))=";
 
 var tokenizers = new List<Tokenizer>()
 {
@@ -50,9 +50,9 @@ object[] rows = new object[]
     new object[]{"-",                   Symbols.Null,           Symbols.Null,           Symbols.Null,       new Symbols(minus, T, O),       Symbols.Null},
     new object[]{"*",                   Symbols.Null,           Symbols.Null,           Symbols.Null,       new Symbols(multiply, T, O),    Symbols.Null},
     new object[]{"/",                   Symbols.Null,           Symbols.Null,           Symbols.Null,       new Symbols(divide, T, O),      Symbols.Null},
-    new object[]{TokenType.Constant,    new Symbols(X),    new Symbols(E, equal),  new Symbols(T, O),  Symbols.Null,                   new Symbols(num)},
-    new object[]{"(",                   new Symbols(X),    new Symbols(E, equal),  new Symbols(T, O),  Symbols.Null,                   new Symbols(openBracket, E, closeBracket)},
-    new object[]{")",                   Symbols.Null,           Symbols.Null,           Symbols.Empty(),    Symbols.Null,                   Symbols.Null},
+    new object[]{TokenType.Constant,    new Symbols(X),         new Symbols(E, equal),  new Symbols(T, O),  Symbols.Null,                   new Symbols(num)},
+    new object[]{"(",                   new Symbols(X),         new Symbols(E, equal),  new Symbols(T, O),  Symbols.Null,                   new Symbols(openBracket, E, closeBracket)},
+    new object[]{")",                   Symbols.Null,           Symbols.Null,           Symbols.Null,       Symbols.Empty(),                Symbols.Null},
 };
 foreach (object[] _row in rows)
     table.Rows.Add(_row);
@@ -61,4 +61,5 @@ ParserTable parserTable = new ParserTable(table);
 
 var compiler = new Compiler(tokenizers, S, end, parserTable);
 compiler.Compile(expression);
+
 Console.WriteLine($"IsScriptValid = {compiler.Success}");

@@ -10,7 +10,7 @@ namespace MyCompiler.Analyzers
             Type = type;
             Lexeme = lexeme;
         }
-        public override string ToString() => $"'{Type}';'{Lexeme}'";
+        public override string ToString() => $"'{Type}':'{Lexeme}'";
         public static Token Invalid => new Token(TokenType.Invalid, "");
     }
 }

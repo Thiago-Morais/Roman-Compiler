@@ -27,8 +27,8 @@ namespace MyCompiler.Analyzers
                 lexeme = TokenType.Constant.ToString();
             else
                 lexeme = token.Lexeme;
-            DataRow row = Table.Rows.Find(lexeme);
 
+            DataRow row = Table.Rows.Find(lexeme);
             DataColumn column = Table.Columns[symbol.Value];
             return row[column] as Symbols?;
         }

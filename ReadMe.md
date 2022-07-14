@@ -28,7 +28,6 @@ O ::= ''
 O ::= * T O
 O ::= / T O
 T ::= num
-T ::= id
 T ::= ( E )
 
 num - num * ( num + num / ( num + num ) ) =
