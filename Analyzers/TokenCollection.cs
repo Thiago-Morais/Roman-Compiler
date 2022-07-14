@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Text.Json;
 
-namespace MyCompiler.Analyzers.Lexical
+namespace MyCompiler.Analyzers
 {
     // TODO mudar para hashtable ou dicionario com o tipo como chave e uma lista dos tokens como valor
     [Serializable]
     public struct TokensCollection : ICollection<Token>
     {
-        Collection<Token> tokens;
+        readonly Collection<Token> tokens = new Collection<Token>();
         public int Count => tokens.Count;
         public bool IsReadOnly => false;
-        public TokensCollection()
-        {
-            tokens = new Collection<Token>();
-        }
+        public TokensCollection() { }
         public void Add(Token token) => tokens.Add(token);
         public void Clear() => tokens.Clear();
         public bool Contains(Token token) => tokens.Contains(token);

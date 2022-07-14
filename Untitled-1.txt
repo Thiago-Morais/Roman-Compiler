@@ -1,19 +1,18 @@
-S::=E
-E::=M
-E::=D
-E::=A
-E::=N
-E::=(E)
-M::=T*E
-D::=T/E
-A::=T+E
-N::=T-E
-T::=num
-T::=id
-M::=T
-D::=T
-A::=T
-N::=T
+E ::= M
+E ::= D
+E ::= A
+E ::= N
+E ::= ( E )
+M ::= T * E
+D ::= T / E
+A ::= T + E
+N ::= T - E
+T ::= num
+T ::= id
+M ::= T
+D ::= T
+A ::= T
+N ::= T
 
 I II III IV V VI VII VIII IX X
 XI XII XIII XIV XV XVI XVII XVIII XIX XX
@@ -34,6 +33,9 @@ E ::= - T E
 E ::= ''
 E ::= * T E
 E ::= / T E
+T ::= num
+T ::= id
+T ::= ( X )
 # T ::= I T' | V T' | X T' | L T' | C T'
 # T' ::= I T'' | '' | V T'' | X T'' | L | C
 # T'' ::= I | ''

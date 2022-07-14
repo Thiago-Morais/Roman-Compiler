@@ -1,16 +1,15 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace MyCompiler.Analyzers.Lexical
+namespace MyCompiler.Analyzers
 {
-    public class LexicalAnalyzer
+    public class LexicalAnalyzer : IResetable
     {
+        Scanner scanner = new Scanner();
+        readonly TokenizerCollection parser = new TokenizerCollection();
         public List<Tokenizer> Tokenizers { get; set; }
         public TokensCollection Tokens { get; protected set; } = new TokensCollection();
-        public bool IsDone { get; internal set; }
-
-        Scanner scanner = new Scanner();
-        Parser parser = new Parser();
+        public bool IsDone { get; set; }
         public LexicalAnalyzer(List<Tokenizer> tokenizers)
         {
             Tokenizers = tokenizers;
@@ -36,7 +35,12 @@ namespace MyCompiler.Analyzers.Lexical
                     break;
                 }
             }
+            IsDone = true;
         }
-        void Reset() => Tokens.Clear();
+        public void Reset()
+        {
+            IsDone = false;
+            Tokens.Clear();
+        }
     }
 }

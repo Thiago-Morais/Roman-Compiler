@@ -1,4 +1,4 @@
-namespace MyCompiler.Analyzers.Lexical
+namespace MyCompiler.Analyzers
 {
     public enum TokenType { Identifier, Operator, Constant, Puntuator, Invalid }
     public struct Token

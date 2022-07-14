@@ -1,8 +1,8 @@
 using System.Text.RegularExpressions;
 
-namespace MyCompiler.Analyzers.Lexical
+namespace MyCompiler.Analyzers
 {
-    public struct Scanner
+    public struct Scanner : IResetable<string>
     {
         public int NextIndex { get; private set; }
         public string OriginalExpression { get; private set; }
@@ -25,7 +25,12 @@ namespace MyCompiler.Analyzers.Lexical
         }
         public void Reset(string expression)
         {
+            Reset();
             OriginalExpression = expression;
+        }
+        public void Reset()
+        {
+            OriginalExpression = "";
             NextIndex = 0;
             Failed = false;
         }

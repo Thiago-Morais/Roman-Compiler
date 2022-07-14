@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace MyCompiler.Analyzers.Lexical
+namespace MyCompiler.Analyzers
 {
     public class Tokenizer
     {

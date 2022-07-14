@@ -20,13 +20,18 @@ Implementação do Analisador Léxico/Sintático para uma Calculadora que aceite
 ## Grammar
 
 ```txt
-S -> E
-E -> M | D | A | N | (E)
-M -> T * T
-D -> T / T
-A -> T + T
-N -> T - T
-T -> id | num
+X ::= E =
+E ::= T O
+O ::= + T O
+O ::= - T O
+O ::= ''
+O ::= * T O
+O ::= / T O
+T ::= num
+T ::= id
+T ::= ( E )
+
+num - num * ( num + num / ( num + num ) ) =
 ```
 
 ## Lexemas

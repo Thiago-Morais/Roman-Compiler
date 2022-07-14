@@ -1,23 +1,40 @@
 using System.Text;
-using System.Text.Json;
-using MyCompiler.Analyzers.Lexical;
+using MyCompiler.Analyzers;
 
 namespace MyCompiler
 {
-    public class Compiler
+    public class Compiler : IResetable
     {
         LexicalAnalyzer lexical;
-        public Compiler(List<Tokenizer> tokenizers) => lexical = new LexicalAnalyzer(tokenizers);
+        SyntaxAnalyzer syntax;
+        public bool IsDone { get; protected set; }
+        public bool Success { get; protected set; }
+        public Compiler(List<Tokenizer> tokenizers, Symbol firstSymbol, Symbol endSymbol, ParserTable table)
+        {
+            lexical = new LexicalAnalyzer(tokenizers);
+            syntax = new SyntaxAnalyzer(firstSymbol, endSymbol, table);
+        }
         public void Compile(string expression)
         {
+            Reset();
             lexical.Analyze(expression);
             foreach (Token token in lexical.Tokens)
                 Console.WriteLine(token);
             SaveTokens();
+            syntax.TryParse(lexical.Tokens);
+            Success = syntax.IsValid;
+            IsDone = true;
         }
-        private void SaveTokens()
+        public void Reset()
         {
-            // if (!lexical.IsDone || lexical.Tokens.Count <= 0) return;
+            lexical.Reset();
+            syntax.Reset();
+            IsDone = false;
+            Success = false;
+        }
+        void SaveTokens()
+        {
+            if (!lexical.IsDone || lexical.Tokens.Count <= 0) return;
 
             string tokenJson = TokensCollection.Serialize(lexical.Tokens);
             string TokensPath = Path.Combine(Directory.GetCurrentDirectory(), "Files", "Tokens.json");
@@ -26,23 +43,4 @@ namespace MyCompiler
             File.WriteAllText(TokensPath, tokenJson, Encoding.UTF8);
         }
     }
-    struct ParserTable
-    {
-        string lexeme;
-        Token token;
-    }
-    struct SymbolTable
-    {
-        Dictionary<string, SymbolEntry> entries;
-    }
-    struct SymbolEntry
-    {
-        public string name;
-        public Types type;
-        public int size;
-        public int dimention;
-        public int lineOfDeclaration;
-        public int address;
-    }
-    enum Types { Int, Float, String, Char }
 }
